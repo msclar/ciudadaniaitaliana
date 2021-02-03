@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Ciudadanía italiana por reconstrucción en CABA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+<script>
+    function myFunction() {
+        const quantity_1 = parseInt(document.getElementById('quantity_1').value, 10);
+        const calls_1 = parseInt(document.getElementById('calls_1').value, 10);
+
+        const quantity_2 = parseInt(document.getElementById('quantity_2').value, 10);
+        const calls_2 = parseInt(document.getElementById('calls_2').value, 10);
+
+        const quantity_3 = parseInt(document.getElementById('quantity_3').value, 10);
+        const calls_3 = parseInt(document.getElementById('calls_3').value, 10);
+
+        const winners_per_day = parseInt(document.getElementById('winners_per_day').value, 10);
+        const my_calls = parseInt(document.getElementById('my_calls').value, 10);
+        const total_calls = quantity_1 * calls_1 + quantity_2 * calls_2 + quantity_3 * calls_3 + my_calls;
+
+        const proba = my_calls / total_calls;
+
+        const expected_days_calling = (1 / proba) / winners_per_day;
+        const total_years_calling_once_a_week = expected_days_calling / 52;
+
+        document.getElementById("once_a_week").innerHTML = Math.round(total_years_calling_once_a_week * 100) / 100;
+        document.getElementById("three_times_a_week").innerHTML = Math.round(total_years_calling_once_a_week / 3 * 100) / 100;
+        document.getElementById("five_times_a_week").innerHTML = Math.round(total_years_calling_once_a_week / 5 * 100) / 100;
+    }
+
+    window.onload = function () {
+        myFunction();
+    }
+</script>
+
+<div class="jumbotron text-center">
+    <h1>Ciudadanía italiana por reconstrucción en CABA</h1>
+    <p>¿Cuánto tiempo tengo que llamar en promedio al consulado hasta que me atiendan?</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        Supongamos que hay tres tipos de personas: los que llaman ocasionalmente (tipo 1), los que llaman
+        moderadamente (tipo 2) y los que llaman intensamente (tipo 3). Calcularemos cuál es el número esperado de
+        años que tenemos que llamar hasta que nos atiendan dependiendo de cuánta gente hay, cuánta gente atiende el
+        consulado y cuánto llamamos nosotros.
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-4">
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="quantity_1">Cantidad de personas tipo 1</label>
+                    <input class="form-control" type="number" id="quantity_1" value="8000">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="calls_1">Llamadas diarias de una persona tipo 1</label>
+                    <input class="form-control" type="number" id="calls_1" value="25">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="quantity_2">Cantidad de personas tipo 2</label>
+                    <input class="form-control" type="number" id="quantity_2" value="2000">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="calls_2">Llamadas diarias de una persona tipo 2</label>
+                    <input class="form-control" type="number" id="calls_2" value="100">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="quantity_3">Cantidad de personas tipo 3</label>
+                    <input class="form-control" type="number" id="quantity_3" value="500">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="calls_3">Llamadas diarias de una persona tipo 3</label>
+                    <input class="form-control" type="number" id="calls_3" value="500">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-12">
+            <label for="my_calls">Cantidad de llamadas que hago yo por día</label>
+            <input class="form-control" type="number" id="my_calls" value="100">
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-12">
+            <label for="winners_per_day">Cantidad de personas que atiende el consulado por día</label>
+            <input class="form-control" type="number" id="winners_per_day" value="12">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-sm-12">
+        <button id="compute" type="submit" class="btn btn-primary" onclick="myFunction()">Calcular</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-12 p-3 mb-2 bg-secondary text-white">
+            <p>Si atienden un día a la semana, son <b> <span id="once_a_week"> </span> años </b> llamando</p>
+            <p>Si atienden tres días a la semana, son <b> <span id="three_times_a_week"> </span> años </b> llamando</p>
+            <p>Si atienden cinco días a la semana, son <b> <span id="five_times_a_week"> </span> años </b> llamando</p>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
